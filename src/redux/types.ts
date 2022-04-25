@@ -33,10 +33,6 @@ interface GetListAction {
     type: typeof GET_LIST;
 }
 
-interface UpdateListAction {
-    type: typeof UPDATE_LIST;
-}
-
 interface AddNoteAction {
     type: typeof ADD_NOTE;
     payload: Note;
@@ -65,7 +61,7 @@ interface SetNotificationAction {
     }
 }
 
-export type ListAction = GetListAction | UpdateListAction | AddNoteAction | DeleteNoteAction | EditNoteAction | ChangeStatusNoteAction;
+export type ListAction = GetListAction | AddNoteAction | DeleteNoteAction | EditNoteAction | ChangeStatusNoteAction;
 
 export type NotificationAction = SetNotificationAction;
 
