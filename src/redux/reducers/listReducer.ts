@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { ListAction, ListState, GET_LIST, ADD_NOTE, DELETE_NOTE, EDIT_NOTE, Note } from "../types";
 
 const initialState: ListState = {
@@ -17,7 +16,7 @@ const saveListsToLS = (list: ListState) => {
   localStorage.setItem('note_list', JSON.stringify(list));
 }
 
-export default (state = initialState, action: ListAction): ListState => {
+const listReducer =  (state = initialState, action: ListAction): ListState => {
   const listsFromLS = getListsFromLS();
   let clonedListsFromLS:{notes: Note[]} = {...listsFromLS};
   let clonedNotes: Note[];
@@ -31,7 +30,8 @@ export default (state = initialState, action: ListAction): ListState => {
       }
 
     case ADD_NOTE:
-      clonedListsFromLS.notes.push(action.payload);
+      let note = {...action.payload, id: Date.now()}
+      clonedListsFromLS.notes.push(note);
       saveListsToLS(clonedListsFromLS);
       return {
         ...state,
@@ -64,3 +64,5 @@ export default (state = initialState, action: ListAction): ListState => {
       return state;
   }
 }
+
+export default listReducer;

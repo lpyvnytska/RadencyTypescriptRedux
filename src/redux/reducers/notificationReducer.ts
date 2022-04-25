@@ -6,7 +6,7 @@ const initialState: NotificationState = {
   status: 'info'
 }
 
-export default (state = initialState, action: NotificationAction): NotificationState => {
+const notificationReducer = (state = initialState, action: NotificationAction): NotificationState => {
   switch(action.type) {
     case SET_NOTIFICATION:
       return {
@@ -18,3 +18,5 @@ export default (state = initialState, action: NotificationAction): NotificationS
       return state;
   }
 }
+
+export default notificationReducer;
