@@ -1,8 +1,15 @@
-import { ListAction, GET_LIST, Note, ADD_NOTE, DELETE_NOTE, EDIT_NOTE, CHANGE_STATUS_NOTE } from "../types";
+import { ListAction, Note, GET_LIST, INIT_LIST, ADD_NOTE, DELETE_NOTE, EDIT_NOTE, CHANGE_STATUS_NOTE, ListState } from "../types";
 
-export const getLists = (): ListAction => {
+export const getList = (): ListAction => {
   return {
     type: GET_LIST
+  }
+}
+
+export const initList = (notes: ListState): ListAction => {
+  return {
+    type: INIT_LIST,
+    payload: notes
   }
 }
 

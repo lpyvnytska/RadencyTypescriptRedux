@@ -1,5 +1,5 @@
 import React, {FC, useState, FormEvent, ChangeEvent } from 'react';
-import { categories } from '../Categories/categories'
+import { Category } from '../../redux/types'
 
 import './NoteForm.css'
 
@@ -37,7 +37,7 @@ const NoteForm: FC<INoteFormProps> = ({ note = {}, handleSubmit, handleCancel}) 
                 <select name="categories" value={currentCategory}
                     onChange={changeCategory}
                 >
-                    {Object.keys(categories).map(item => {
+                    {Object.keys(Category).map(item => {
                         return (
                             <option value={item} key={item}>
                                 {item}

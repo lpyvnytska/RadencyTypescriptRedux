@@ -1,7 +1,7 @@
 import { icons } from '../components/Categories/svg_icons'
 
 export const GET_LIST = 'GET_LIST';
-export const UPDATE_LIST = 'UPDATE_LIST';
+export const INIT_LIST = 'INIT_LIST';
 
 export const ADD_NOTE = 'ADD_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
@@ -32,6 +32,10 @@ export interface Note {
 interface GetListAction {
     type: typeof GET_LIST;
 }
+interface InitListAction {
+    type: typeof INIT_LIST;
+    payload: ListState;
+}
 
 interface AddNoteAction {
     type: typeof ADD_NOTE;
@@ -61,7 +65,7 @@ interface SetNotificationAction {
     }
 }
 
-export type ListAction = GetListAction | AddNoteAction | DeleteNoteAction | EditNoteAction | ChangeStatusNoteAction;
+export type ListAction = GetListAction | InitListAction | AddNoteAction | DeleteNoteAction | EditNoteAction | ChangeStatusNoteAction;
 
 export type NotificationAction = SetNotificationAction;
 

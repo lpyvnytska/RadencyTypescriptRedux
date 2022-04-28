@@ -1,9 +1,12 @@
-export let todoList = [
+import { Category, ListState } from "./types";
+
+export let todoList : ListState = {
+    notes: [
     {
         id: 1,
         name: 'Shopping list',
         created: new Date('04/20/2021'),
-        category: "Idea",
+        category: Category.Idea,
         content: 'Tomatoes, bread',
         active: true
     },
@@ -11,7 +14,7 @@ export let todoList = [
         id: 2,
         name: 'The theory of evolution',
         created: new Date('04/27/2021'),
-        category: "Quote",
+        category: Category.Quote,
         content: 'The evolution is something',
         active: true
     },
@@ -19,7 +22,7 @@ export let todoList = [
         id: 3,
         name: "New Feature",
         created: new Date('04/27/2021'),
-        category: "Idea",
+        category: Category.Idea,
         content: "Implement some feature in this app",
         dates: "",
         active: false
@@ -28,7 +31,7 @@ export let todoList = [
         id: 4,
         name: "Dentist",
         created: new Date('3/5/2021'),
-        category: "Task",
+        category: Category.Note,
         content: "I’m gonna have a dentist appointment on the 3/5/2021, I moved it from 5/5/2021",
         dates: "3/5/2021, 5/5/2021",
         active: false
@@ -37,7 +40,7 @@ export let todoList = [
         id: 5,
         name: "William Gaddis",
         created: new Date(),
-        category: "Quote",
+        category: Category.Quote,
         content: "Power doesn't come with bla bla bla",
         dates: "",
         active: true
@@ -46,9 +49,9 @@ export let todoList = [
         id: 6,
         name: "Book",
         created: new Date(),
-        category: "Task",
+        category: Category.RandomThought,
         content: "The Lean Statrup",
         dates: "",
         active: true
     },
-]
+]}

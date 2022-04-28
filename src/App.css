@@ -11,13 +11,6 @@ main{
     color: var(--main-font-color);
 }
 
-.create__button {
-    float: right;
-    width: 10em;
-    height: 2em;
-    margin: 1em 0 4em;
-}
-
 @media screen and (max-width: 800px) {
     main{
         padding: 2em 0;
