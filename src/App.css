@@ -1,0 +1,25 @@
+@import './variables.css';
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    padding: 2em 4em;
+    color: var(--main-font-color);
+}
+
+.create__button {
+    float: right;
+    width: 10em;
+    height: 2em;
+    margin: 1em 0 4em;
+}
+
+@media screen and (max-width: 800px) {
+    main{
+        padding: 2em 0;
+    } 
+}

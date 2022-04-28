@@ -1,4 +1,4 @@
-import { icons } from '../svg_icons'
+import { icons } from '../components/Categories/svg_icons'
 
 export const GET_LIST = 'GET_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
@@ -10,7 +10,7 @@ export const CHANGE_STATUS_NOTE = 'CHANGE_STATUS_NOTE';
 
 export const SET_NOTIFICATION = 'SET_NOTIFICATION';
 
-enum Category {
+export enum Category {
     Idea = icons.IDEA_ICON,
     Quote = icons.QUOTE_ICON,
     Note = icons.TASK_ICON,

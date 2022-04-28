@@ -1,4 +1,4 @@
-import { ListAction, ListState, GET_LIST, ADD_NOTE, DELETE_NOTE, EDIT_NOTE, Note } from "../types";
+import { ListAction, ListState, GET_LIST, ADD_NOTE, DELETE_NOTE, EDIT_NOTE, CHANGE_STATUS_NOTE, Note } from "../types";
 
 const initialState: ListState = {
     notes: []
@@ -53,6 +53,17 @@ const listReducer =  (state = initialState, action: ListAction): ListState => {
       clonedNotes = [...clonedListsFromLS.notes];
       noteIdx = clonedNotes.findIndex(note => note.id === action.payload.id);
       clonedNotes[noteIdx] = action.payload
+      clonedListsFromLS = { ...clonedListsFromLS, notes: [...clonedNotes ]}
+      saveListsToLS(clonedListsFromLS);
+      return {
+        ...state,
+        ...clonedListsFromLS
+      }
+
+    case CHANGE_STATUS_NOTE:
+      clonedNotes = [...clonedListsFromLS.notes];
+      noteIdx = clonedNotes.findIndex(note => note.id === action.payload.id);
+      clonedNotes[noteIdx].active = !clonedNotes[noteIdx].active
       clonedListsFromLS = { ...clonedListsFromLS, notes: [...clonedNotes ]}
       saveListsToLS(clonedListsFromLS);
       return {
