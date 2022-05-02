@@ -13,8 +13,6 @@ import { useDispatch } from "react-redux";
 import { changeStatusNote, deleteNote, editNote } from "../../redux/actions";
 import NoteForm from "../NoteForm/NoteForm";
 import { deleteFirstLetter } from "../../utils/deleleFirstLetter";
-import { idText } from "typescript";
-
 interface ITableToDoList {
     showActive: boolean
 }
@@ -61,7 +59,7 @@ const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
         let newNote: Note = {
             id: parseInt(id.value),
             name: name.value,
-            created: new Date(),
+            created: currentNote.created,
             category: Category[categories.value as keyof typeof Category],
             content: content.value,
             dates: parseDatesFromText(content.value),
@@ -113,7 +111,7 @@ const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
                             id: note.id || 0,
                             icon: note.category.toString(),
                             name: note.name,
-                            created: note.created.toLocaleString(),
+                            created: note.created,
                             category: deleteFirstLetter(Category[note.category]),
                             content: note.content,
                             dates: note.dates || ''

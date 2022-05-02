@@ -4,7 +4,7 @@ export type ITodoRow = {
     id: number,
     icon: string
     name: string,
-    created: string,
+    created: Date,
     category: string,
     content: string,
     dates: string

@@ -22,7 +22,7 @@ const TableRow: FC<ITableRow> = ({ row, additionIcons = false, editCurrentNote, 
             </td>
             {
                 Object.entries(showRow).map(([key, value]) =>
-                    <td key={key + id}>{value}</td>
+                    <td key={key + id}>{value.toString()}</td>
                 )
             }
             {additionIcons && editCurrentNote &&
