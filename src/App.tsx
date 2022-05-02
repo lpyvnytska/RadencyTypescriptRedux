@@ -1,7 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
 
 import './App.css';
+import { RootState } from './redux/store'
 
 import Header from './components/Header/Header';
 import TableStatic from './components/Tables/TableStatic';
@@ -11,6 +13,7 @@ import { todoList } from './redux/date'
 import { initList } from './redux/actions';
 
 const App: FC = () => {
+  let fullList = useSelector((state: RootState) => state.list.notes)
   const dispatch = useDispatch()
   useEffect(() => {dispatch(initList(todoList))}, [todoList])
 
@@ -18,9 +21,9 @@ const App: FC = () => {
     <div className="App">
       <Header title="Task2" subtitle='Todo list' />
       <main>
-        <TableToDoList showActive={true}></TableToDoList>
+        <TableToDoList showActive={true} fullList={fullList}></TableToDoList>
         <MiddleBlock/>
-        <TableStatic></TableStatic>
+        <TableStatic fullList={fullList}></TableStatic>
       </main>
     </div>
   );

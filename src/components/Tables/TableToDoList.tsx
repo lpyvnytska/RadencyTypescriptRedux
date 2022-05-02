@@ -1,7 +1,5 @@
 import React, { FC, useState, useEffect, FormEvent } from "react";
-import { useSelector } from "react-redux";
 import TableRow from "./TableRow";
-import { RootState } from '../../redux/store'
 
 import { icons } from "../Categories/svg_icons";
 import { parseDatesFromText } from '../../utils/regexpDate'
@@ -14,15 +12,14 @@ import { changeStatusNote, deleteNote, editNote } from "../../redux/actions";
 import NoteForm from "../NoteForm/NoteForm";
 import { deleteFirstLetter } from "../../utils/deleleFirstLetter";
 interface ITableToDoList {
-    showActive: boolean
+    showActive: boolean,
+    fullList: Note[]
 }
 
-const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
+const TableToDoList: FC<ITableToDoList> = ({ showActive = true , fullList}) => {
     let dispatch = useDispatch()
     const [isEditFormVisible, setIsEditFormVisible] = useState<boolean>(false)
     const [currentEditabledNote, setCurrentEditabledNote] = useState({})
-
-    let fullList = useSelector((state: RootState) => state.list.notes)
 
     const [isListActive, setIsListActive] = useState(true)
     const [currentList, setCurrentList] = useState(fullList.filter(note => note.active === isListActive))
