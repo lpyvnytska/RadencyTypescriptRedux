@@ -1,15 +1,19 @@
-import React, { FC, useState, useEffect, MouseEvent } from "react";
+import React, { FC, useState, useEffect, FormEvent } from "react";
 import { useSelector } from "react-redux";
 import TableRow from "./TableRow";
 import { RootState } from '../../redux/store'
 
 import { icons } from "../Categories/svg_icons";
+import { parseDatesFromText } from '../../utils/regexpDate'
 
 import './Tables.css'
 import { Category, Note } from "../../redux/types";
 import { ITodoRow } from "./TableTypes";
 import { useDispatch } from "react-redux";
-import { changeStatusNote } from "../../redux/actions";
+import { changeStatusNote, deleteNote, editNote } from "../../redux/actions";
+import NoteForm from "../NoteForm/NoteForm";
+import { deleteFirstLetter } from "../../utils/deleleFirstLetter";
+import { idText } from "typescript";
 
 interface ITableToDoList {
     showActive: boolean
@@ -17,6 +21,8 @@ interface ITableToDoList {
 
 const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
     let dispatch = useDispatch()
+    const [isEditFormVisible, setIsEditFormVisible] = useState<boolean>(false)
+    const [currentEditabledNote, setCurrentEditabledNote] = useState({})
 
     let fullList = useSelector((state: RootState) => state.list.notes)
 
@@ -30,14 +36,41 @@ const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
         setIsListActive(!isListActive)
     }
     const editCurrentNote = (id:number) => {
-
+        let currentNote = fullList.filter(note => note.id === id)[0]
+        setCurrentEditabledNote ({id: currentNote.id, name:currentNote.name, category: Category[currentNote.category], content:currentNote.content})
+        setIsEditFormVisible(true)
     }
     const changeStatusCurrentNote = (id:number) => {
         dispatch(changeStatusNote(id))
     }
     const deleteCurrentNote = (id:number) => {
-        
-    }  
+        dispatch( deleteNote(id))
+    } 
+    const editNoteHandler = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        setIsEditFormVisible(false)
+        const {id, name, categories, content } =
+            e.target as typeof e.target & {
+                id: {value: string}
+                name: { value: string };
+                categories: { value: string };
+                content: { value: string };
+            };
+         
+        let currentNote = fullList.filter(note => note.id === parseInt(id.value))[0]
+        let newNote: Note = {
+            id: parseInt(id.value),
+            name: name.value,
+            created: new Date(),
+            category: Category[categories.value as keyof typeof Category],
+            content: content.value,
+            dates: parseDatesFromText(content.value),
+            active: currentNote.active
+        }
+       
+        dispatch(editNote(newNote));
+        setCurrentList([...currentList, newNote])       
+    } 
 
     return (
         <div>
@@ -81,7 +114,7 @@ const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
                             icon: note.category.toString(),
                             name: note.name,
                             created: note.created.toLocaleString(),
-                            category: Category[note.category],
+                            category: deleteFirstLetter(Category[note.category]),
                             content: note.content,
                             dates: note.dates || ''
                         }
@@ -94,6 +127,10 @@ const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
                     })}
                 </tbody>
             </table>
+            {isEditFormVisible && <NoteForm 
+                note={currentEditabledNote} 
+                handleCancel={() => setIsEditFormVisible(false)} 
+                handleSubmit={e => editNoteHandler(e)} />}
         </div>
     );
 }

@@ -1,10 +1,12 @@
-import React, {FC, useState, FormEvent, ChangeEvent } from 'react';
+import React, {FC, useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { Category } from '../../redux/types'
+import { deleteFirstLetter } from '../../utils/deleleFirstLetter';
 
 import './NoteForm.css'
 
 export interface INoteFormProps {
     note?: {
+        id?: number;
         name?: string;
         category?: string;
         content?: string;
@@ -13,10 +15,11 @@ export interface INoteFormProps {
     handleCancel: () => void
 }
 
-const NoteForm: FC<INoteFormProps> = ({ note = {}, handleSubmit, handleCancel}) => {
-    const [currentName, setCurrentName] = useState(note.name||'')
+const NoteForm: FC<INoteFormProps> = ({note = {}, handleSubmit, handleCancel}) => {
+    
+    const [currentName, setCurrentName] = useState(note.name)
     const [currentCategory, setCurrentCategory] = useState(note.category)
-    const [currentContent, setCurrentContent] = useState(note.content||'')
+    const [currentContent, setCurrentContent] = useState(note.content)
 
     const changeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
         setCurrentCategory(e.target.value)
@@ -32,15 +35,18 @@ const NoteForm: FC<INoteFormProps> = ({ note = {}, handleSubmit, handleCancel}) 
     return (
         <div className='modal-div'>
             <form onSubmit={e => handleSubmit(e)}>
+                <input type="hidden" name="id" value={note.id} />
                 <input type="text" name="name" value={currentName} placeholder="Name" required 
                     onChange={changeName}/>
                 <select name="categories" value={currentCategory}
                     onChange={changeCategory}
                 >
-                    {Object.keys(Category).map(item => {
+                    {Object.keys(Category)
+                    .filter( k => k[0]==='_')
+                    .map(item => {
                         return (
                             <option value={item} key={item}>
-                                {item}
+                                {deleteFirstLetter(item)}
                             </option>
                         )
                     })}

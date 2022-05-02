@@ -11,10 +11,10 @@ export const CHANGE_STATUS_NOTE = 'CHANGE_STATUS_NOTE';
 export const SET_NOTIFICATION = 'SET_NOTIFICATION';
 
 export enum Category {
-    Idea = icons.IDEA_ICON,
-    Quote = icons.QUOTE_ICON,
-    Note = icons.TASK_ICON,
-    RandomThought = icons.THOUGHT_ICON
+    _Idea = icons.IDEA_ICON,
+    _Quote = icons.QUOTE_ICON,
+    _Note = icons.TASK_ICON,
+    _RandomThought = icons.THOUGHT_ICON
 }
 
 export interface Note {

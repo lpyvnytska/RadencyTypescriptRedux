@@ -60,7 +60,7 @@ const listReducer =  (state = initialState, action: ListAction): ListState => {
     case EDIT_NOTE:
       clonedNotes = [...clonedListsFromLS.notes];
       noteIdx = clonedNotes.findIndex(note => note.id === action.payload.id);
-      clonedNotes[noteIdx] = action.payload
+      clonedNotes[noteIdx] ={ ...clonedNotes[noteIdx], ...action.payload}
       clonedListsFromLS = { ...clonedListsFromLS, notes: [...clonedNotes ]}
       saveListsToLS(clonedListsFromLS);
       return {
