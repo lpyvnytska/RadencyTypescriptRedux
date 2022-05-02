@@ -20,23 +20,23 @@ export const addNote = (note: Note): ListAction => {
   }
 }
 
-export const deleteNote = (note: Note): ListAction => {
+export const deleteNote = (id: number): ListAction => {
   return {
     type: DELETE_NOTE,
-    payload: note
+    payload: id
   }
 }
 
-export const editNote = (note:Note): ListAction => {
+export const editNote = (note: Note): ListAction => {
   return {
     type: EDIT_NOTE,
     payload: note
   }
 }
 
-export const changeStatusNote = (note:Note): ListAction => {
+export const changeStatusNote = (id: number): ListAction => {
   return {
     type: CHANGE_STATUS_NOTE,
-    payload: note
+    payload: id
   }
 }

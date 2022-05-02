@@ -48,7 +48,7 @@ const listReducer =  (state = initialState, action: ListAction): ListState => {
 
     case DELETE_NOTE:
       clonedNotes = [...clonedListsFromLS.notes];
-      noteIdx = clonedNotes.findIndex(note => note.id === action.payload.id);
+      noteIdx = clonedNotes.findIndex(note => note.id === action.payload);
       clonedNotes.splice(noteIdx, 1);
       clonedListsFromLS = { ...clonedListsFromLS, notes: [...clonedNotes ]}
       saveListsToLS(clonedListsFromLS);
@@ -70,9 +70,9 @@ const listReducer =  (state = initialState, action: ListAction): ListState => {
 
     case CHANGE_STATUS_NOTE:
       clonedNotes = [...clonedListsFromLS.notes];
-      noteIdx = clonedNotes.findIndex(note => note.id === action.payload.id);
+      noteIdx = clonedNotes.findIndex(note => note.id === action.payload);
       clonedNotes[noteIdx].active = !clonedNotes[noteIdx].active
-      clonedListsFromLS = { ...clonedListsFromLS, notes: [...clonedNotes ]}
+      clonedListsFromLS = { notes: [...clonedNotes ]}
       saveListsToLS(clonedListsFromLS);
       return {
         ...state,

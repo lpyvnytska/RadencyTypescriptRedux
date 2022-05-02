@@ -8,12 +8,15 @@ import { icons } from "../Categories/svg_icons";
 import './Tables.css'
 import { Category, Note } from "../../redux/types";
 import { ITodoRow } from "./TableTypes";
+import { useDispatch } from "react-redux";
+import { changeStatusNote } from "../../redux/actions";
 
 interface ITableToDoList {
     showActive: boolean
 }
 
 const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
+    let dispatch = useDispatch()
 
     let fullList = useSelector((state: RootState) => state.list.notes)
 
@@ -26,13 +29,11 @@ const TableToDoList: FC<ITableToDoList> = ({ showActive = true }) => {
     const handleArchiveState = () => {
         setIsListActive(!isListActive)
     }
-
-
     const editCurrentNote = (id:number) => {
 
     }
     const changeStatusCurrentNote = (id:number) => {
-
+        dispatch(changeStatusNote(id))
     }
     const deleteCurrentNote = (id:number) => {
         

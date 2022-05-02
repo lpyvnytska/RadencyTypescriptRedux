@@ -44,7 +44,7 @@ interface AddNoteAction {
 
 interface DeleteNoteAction {
     type: typeof DELETE_NOTE;
-    payload: Note;
+    payload: number;
 }
 
 interface EditNoteAction {
@@ -54,7 +54,7 @@ interface EditNoteAction {
 
 interface ChangeStatusNoteAction {
     type: typeof CHANGE_STATUS_NOTE;
-    payload: Note;
+    payload: number;
 }
 
 interface SetNotificationAction {
